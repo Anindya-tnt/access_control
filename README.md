@@ -5,6 +5,7 @@ This document outlines the following aspects:
 1. Assumptions made for this project
 2. How to setup this project
 3. How to run this project
+4. Sample run
 
 ## Assumptions
    - Below roles are assumed:
@@ -29,7 +30,7 @@ This document outlines the following aspects:
    - I have used sqlite3. Please install relevant packages in your env.
      Should be easy to download and install relevant packages.
 
-   - Admin user is added. Password is admin123
+   - Admin user is added. email_id: admin@accesscontrol.com, password: admin123
    
    - Resources are added. CPU and MEMORY are the ones which are in db. Feel free to add more.
      Install sqlitebrowser for easier db related handling.
@@ -84,3 +85,56 @@ This document outlines the following aspects:
 
 ## How to run this project
    - From project root directory. hit python access.py
+
+## Sample run
+```
+(access) anindya@anindya-ThinkPad-X1-Carbon-7th:~/practice/role_based_AC/access_control$ python access.py 
+**************************************************
+hi! you are logged in as admin
+press 1 for login as another user
+press 2 for create user
+press 3 for edit role
+Press anything else to quit!
+Enter your choice: 1
+Enter your email_id: a
+Enter your password: 
+**************************************************
+hi! you are logged in as a
+press 1 for login as another user
+press 2 for view roles
+press 3 for access resource
+Press anything else to quit!
+Enter your choice: 2
+Available roles are ['RWD', 'R', 'W', 'D', 'RW', 'RD', 'WD']
+**************************************************
+hi! you are logged in as a
+press 1 for login as another user
+press 2 for view roles
+press 3 for access resource
+Press anything else to quit!
+Enter your choice: 3
+Enter resource name to access: CPU
+Available access_types to choose are ['READ', 'WRITE', 'DELETE']
+Enter access type: READ
+You are allowed READ access to resource: CPU
+**************************************************
+hi! you are logged in as a
+press 1 for login as another user
+press 2 for view roles
+press 3 for access resource
+Press anything else to quit!
+Enter your choice: 3
+Enter resource name to access: CPU
+Available access_types to choose are ['READ', 'WRITE', 'DELETE']
+Enter access type: WRITE
+[2021-05-17 02:37:20,200] [INFO] [user] [95] - Your role does not permit you WRITE access to resource CPU
+**************************************************
+hi! you are logged in as a
+press 1 for login as another user
+press 2 for view roles
+press 3 for access resource
+Press anything else to quit!
+Enter your choice: 4
+Thank you! Hope to see you again.
+**************************************************
+```
