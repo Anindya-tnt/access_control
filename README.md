@@ -23,6 +23,47 @@ Assumptions
 
    - It is assumed that it is role which will define what kind of access you have to the resource,
      e.g. if your current role is RWD, then you can READ, WRITE and DELETE any of the resources.
+     
+   - DB SCHEMA:
+     - CREATE TABLE ROLE(
+       ID INT PRIMARY KEY NOT NULL,
+       NAME CHAR(32) NOT NULL);
+     - CREATE TABLE USER_ROLE(
+       user_id INTEGER,
+       role_id INTEGER,
+       PRIMARY KEY (user_id, role_id) 
+       FOREIGN KEY (user_id) 
+       REFERENCES USER (ID)
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION,
+       FOREIGN KEY (role_id)
+       REFERENCES ROLE (id)
+        ON DELETE CASCADE
+        ON UPDATE NO ACTION
+       );
+     - CREATE TABLE sqlite_sequence(name,seq);
+     - CREATE TABLE IF NOT EXISTS "USER" (
+	    "ID"	INTEGER NOT NULL,
+	    "FIRST_NAME"	CHAR(32),
+	    "LAST_NAME"	CHAR(32),
+	    "EMAIL"	CHAR(50) UNIQUE,
+	    PRIMARY KEY("ID" AUTOINCREMENT)
+       );
+
+     - CREATE TABLE IF NOT EXISTS "AUTH" (
+	    "ID"	INTEGER NOT NULL,
+	    "user_id"	INTEGER,
+	    "password"	CHAR(32),
+	    "salt"	CHAR(32),
+	    FOREIGN KEY("user_id") REFERENCES "USER"("ID") ON DELETE CASCADE ON UPDATE NO ACTION,
+	    PRIMARY KEY("ID" AUTOINCREMENT)
+       );
+
+     - CREATE TABLE IF NOT EXISTS "RESOURCE" (
+	    "ID"	INTEGER NOT NULL,
+	    "NAME"	CHAR(32) NOT NULL,
+	    PRIMARY KEY("ID" AUTOINCREMENT)
+       );
 
 How to setup this project
    - Create a python3.7 virtualenv and activate it
