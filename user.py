@@ -1,6 +1,10 @@
 from auth import AuthManager
 from db import DatabaseConnection
 from getpass import getpass
+import logging
+
+logging.basicConfig(format='[%(asctime)s] [%(levelname)s] [%(name)s] [%(lineno)d] - %(message)s', level=logging.INFO)
+logger = logging.getLogger('user')
 
 
 def debug_log(statement, debug_flag=False, *args):
