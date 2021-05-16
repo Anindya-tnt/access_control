@@ -54,7 +54,6 @@ Assumptions
 	    "ID"	INTEGER NOT NULL,
 	    "user_id"	INTEGER,
 	    "password"	CHAR(32),
-	    "salt"	CHAR(32),
 	    FOREIGN KEY("user_id") REFERENCES "USER"("ID") ON DELETE CASCADE ON UPDATE NO ACTION,
 	    PRIMARY KEY("ID" AUTOINCREMENT)
        );
