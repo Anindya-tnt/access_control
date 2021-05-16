@@ -25,6 +25,7 @@ class User:
                          "VALUES ((SELECT ID FROM ROLE WHERE NAME = '{}') , (SELECT ID FROM USER WHERE EMAIL = '{}') )  ",
         "GET_ALL_USERS": "SELECT ID, FIRST_NAME, LAST_NAME, EMAIL FROM USER",
         "VIEW_ALL_ROLES": "SELECT NAME FROM ROLE",
+        "GET_ALL_RESOURCES": "SELECT NAME FROM RESOURCE"
     }
 
     @classmethod
@@ -62,7 +63,22 @@ class User:
         self.role = None
         self.auth_manager = self.get_auth_manager()
 
+    @classmethod
+    def get_all_resources(cls, db):
+        query_result = db.read(User.queries["GET_ALL_RESOURCES"])
+        if not query_result[1]:
+            print('No existing resources found')
+            return False
+        resource_details = []
+        for query_result_item in query_result[1]:
+            resource_details.append(query_result_item[0])
+        return resource_details
+
     def access_resource(self, resource_name, access_type):
+        resources = User.get_all_resources(self.db)
+        if resource_name not in resources:
+            print('Resource {} not found'.format(resource_name))
+            return False
         access_type_map = {'READ': 'R', 'WRITE': 'W', 'DELETE': 'D'}
         role = self.fetch_role()
         if not role:
