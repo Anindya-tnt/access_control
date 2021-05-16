@@ -82,7 +82,6 @@ class AccessRequests:
     def get_user_details_from_db(self):
         email_id = input('Enter your email_id: ')
         user_details = User.retrieve_details(self.db, email_id)
-        # print(user_details)
         if user_details:
             return User(user_details[1],user_details[2],user_details[3])
         return None
@@ -111,7 +110,6 @@ class AccessRequests:
         return False
 
     def process_choice(self, choice):
-        current_role = self.current_user.fetch_role()
         is_admin = self.current_user.email == 'admin@accesscontrol.com'
         try:
             int_choice = int(choice)
@@ -133,7 +131,7 @@ class AccessRequests:
                 if access_type not in valid_access_types:
                     print('Not a valid choice .. returning to main menu')
                     return True
-                granted = self.current_user.access_resource(resource_name, access_type)
+                self.current_user.access_resource(resource_name, access_type)
         else:
             debug_log('Could not process illegal choice')
             return False
@@ -160,13 +158,10 @@ class AccessRequests:
             if not to_continue:
                 print(self.statements["AFTER_QUIT_MESSAGE"])
                 break
-            # time.sleep(1)
         print("*" * 50)
+
+
 def main():
-    # db = DatabaseConnection('access_control.db')
-    # db.connect()
-    # rows = db.read("SELECT * FROM USER")
-    # print(rows)
     access_requests = AccessRequests(args)
     access_requests.run()
 
