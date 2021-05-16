@@ -27,6 +27,7 @@ Assumptions
 How to setup this project
    - Create a python3.7 virtualenv and activate it
    - pip install -r requirements.txt (only one package to install - docopt for reading command line args)
+   - user.py takes care of user management
    - db.py takes care of db related tasks
    - auth.py takes care of authentication of users
    - access.py is the file to invoke this app
