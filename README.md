@@ -6,7 +6,7 @@ This document outlines the following aspects:
 2. How to setup this project
 3. How to run this project
 
-Assumptions
+## Assumptions
    - Below roles are assumed:
      RWD role - For Read, Write and Delete access
      R role - For Read access
@@ -74,7 +74,7 @@ Assumptions
 	    PRIMARY KEY("ID" AUTOINCREMENT)
        );
 
-How to setup this project
+## How to setup this project
    - Create a python3.7 virtualenv and activate it
    - pip install -r requirements.txt (only one package to install - docopt for reading command line args)
    - user.py takes care of user management
@@ -82,5 +82,5 @@ How to setup this project
    - auth.py takes care of authentication of users
    - access.py is the file to invoke this app
 
-How to run this project
+## How to run this project
    - From project root directory. hit python access.py
