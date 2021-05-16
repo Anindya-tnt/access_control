@@ -24,6 +24,8 @@ Assumptions
    - It is assumed that it is role which will define what kind of access you have to the resource,
      e.g. if your current role is RWD, then you can READ, WRITE and DELETE any of the resources.
      
+   - I have used ubuntu 18.04 for dev.
+
    - I have used sqlite3. Please install relevant packages in your env.
      Should be easy to download and install relevant packages.
 
