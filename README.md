@@ -24,7 +24,15 @@ Assumptions
    - It is assumed that it is role which will define what kind of access you have to the resource,
      e.g. if your current role is RWD, then you can READ, WRITE and DELETE any of the resources.
      
-   - DB SCHEMA:
+   - I have used sqlite3. Please install relevant packages in your env.
+     Should be easy to download and install relevant packages.
+
+   - Admin user is added. Password is admin123
+   
+   - Resources are added. CPU and MEMORY are the ones which are in db. Feel free to add more.
+     Install sqlitebrowser for easier db related handling.
+
+   - DB SCHEMA (sqlite3):
      - CREATE TABLE ROLE(
        ID INT PRIMARY KEY NOT NULL,
        NAME CHAR(32) NOT NULL);
