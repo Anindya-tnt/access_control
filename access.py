@@ -65,14 +65,23 @@ class AccessRequests:
         for index, user in enumerate(users):
             user_dict[index] = {'id': user[0], 'first_name': user[1], 'last_name': user[2], 'email': user[3]}
             print('Press {} for selecting user with email {}'.format(index, user[3]))
-        user_index_id = int(input())
-        selected_user = User(user_dict[user_index_id]['first_name'],
+        try:
+            user_index_id = int(input())
+            selected_user = User(user_dict[user_index_id]['first_name'],
                              user_dict[user_index_id]['last_name'],
                              user_dict[user_index_id]['email'])
+        except (ValueError, TypeError, KeyError) as e:
+            print('You did not enter a valid choice within accepted range')
+            return
         print('Enter role choices from below list')
         for i in range(len(self.role_map)):
             print('Press {} for {} role'.format(i, self.role_map[i]))
-        role = int(input())
+        try:
+            role = int(input())
+            assert role in range(len(self.role_map))
+        except (ValueError, TypeError, AssertionError) as e:
+            print('You did not enter a valid choice within accepted range')
+            return
         selected_user.set_role(self.role_map[role])
         print('Selected user\'s new role set to: {}'.format(selected_user.fetch_role()))
 
@@ -97,6 +106,8 @@ class AccessRequests:
 
     def login_user(self):
         user_instance = self.get_user_details_from_db()
+        if not user_instance:
+            return False
         current_logged_in_user = self.get_current_logged_in_user()
         if user_instance.email == current_logged_in_user.email:
             print('User is already logged in')
